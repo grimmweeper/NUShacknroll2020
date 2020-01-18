@@ -21,7 +21,7 @@ function createCollection(db){
     });
 }
 
-export function createBoard(db,boardName){
+function createBoard(db,boardName){
   let coll = db.collection(boardName);
   let todo = coll.doc("todo");
   let doing = coll.doc("doing");
@@ -71,11 +71,5 @@ export function createBoard(db,boardName){
   done.set(doneConfig);
 }
 
-export function hello(){
-  console.log("hello");
-}
-
-export {initialise,createCollection};
-
-
 let db = initialise();
+createBoard(db,"test1");
