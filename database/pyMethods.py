@@ -88,6 +88,24 @@ class DB:
         def read_tasks(self):
             return self.read_document("sections")
 
+        def write_document(self, document_name, data):
+            self.board.document(document_name).set(data)
+
+        def add_task(self, section_name, msg, emoji):
+            data = self.read_tasks
+            section = data[section_name]
+            section[msg] = emoji
+            self.write_document("sections", data)
+
+        def add_member(self, handle, name, color="white", emoji):
+            data = self.read_members()
+            data[handle] = {
+                'name': name,
+                'color': color,
+                'emoji': emoji
+            }
+            self.write_document("members", data)
+
 # db = DB()
 # print(db.check_if_board_populated("test4"))
 #
