@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """This bot manages projects through Telegram
 
 It provides updates on how project members are working on different tasks of the projects, helps set meeting timings and agendas.
@@ -64,28 +67,22 @@ def add_members2(update,context):
 
 
 def add_emoji(update,context):
-    user = update.message.from_user
     emoji_list = user_data.get('emoji_list')
     emoji_list.append(update.message.text)
     members_list = user_data.get('members_list')
-    board = user_data['board'].add_member(handle = user.first_name, name=members_list[-1],emoji=emoji_list[-1])
+    board = user_data['board'].add_member(name=members_list[-1], emoji=emoji_list[-1])
     update.message.reply_text("Alright! Who's the next members?")
     return MEMBERS2
 
 def add_last_emoji(update,context):
-    user = update.message.from_user
-    emoji_list = user_data.get('emoji_list')
-    emoji_list.append(update.message.text)
-    members_list = user_data.get('members_list')
-    board = user_data['board'].add_member(handle = user.first_name ,name=members_list[-1], emoji=emoji_list[-1])
     update.message.reply_text("What is {}'s emoji?".format(members_list[-1]))
     return START_PROJECT
 
-
-
-
-
 def start_project(update, context):
+    emoji_list = user_data.get('emoji_list')
+    emoji_list.append(update.message.text)
+    members_list = user_data.get('members_list')
+    board = user_data['board'].add_member(name=members_list[-1], emoji=update.message.text)
     update.message.reply_text("Here's your project code: #1234\n")
     return -1
 
@@ -111,7 +108,14 @@ def show_tasks(update,context):
 
 def show_members(update,context):
     data = user_data.get('board').read_members()
-    update.message.reply_text(data)
+    reply_text = ""
+    for x in data:
+        reply_text += x + ": "+ data.get(x)['emoji']+ "\n"
+
+    update.message.reply_text(reply_text)
+
+def add_task(update,context):
+
 
 
 def cancel(update, context):
