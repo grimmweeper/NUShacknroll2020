@@ -18,6 +18,8 @@
     <div id="noteslist" class="notes">
     </div>
 
+    <button type="button" id="update">update</button>
+
     <script src="{{ url_for('static', filename='newnote.js') }}"></script>
     <script src="{{ url_for('static', filename='initialisation.js') }}"></script>
     <script>
@@ -30,15 +32,31 @@
     </script>
 
     <script>
-        function updatePosition(e){
+        function getJSON(){
+            var totalnotes = document.getElementsByClassName('note');
+            var jsonobject = {};
+            for(section in totalnotes){
+                var actualsection = totalnotes[section];
+                var title = actualsection.getElementsByClassName('title')[0];
+                var body = actualsection.getElementsByClassName('body');
+                var actualbody = {};
+                for(i in body){
+                    var text = body[i];
+                    var keyvalue = text.split(":");
+                    actualbody[keyvalue[0]]=keyvalue[1];
+                }
+                var children = actualsection["body"];
+                jsonobject[title]={'left':actualsection.style.left,'top':actualsection.style.top,'width':actualsection.style.width,'height':actualsection.style.height,'body':actualbody,'color':actualsection.style.color,'title':title};
+            }
+            console.log(jsonobject);
+            var finaljsonobject = {'board_name':"test5",'data':jsonobject};
+
             $.ajax({
             url: '/addTask/',
-            data:"test4",
+            data:JSON.stringify(finaljsonobject),
             type: 'POST',
             success: function(response){
                 console.log(response);
-                notecollection=response;
-                checker = true;
 
             },
             error: function(error){
@@ -46,13 +64,13 @@
             }
         })
 
+
         }
-        var noteclass = document.getElementsByClassName('note');
-        for(var i=0;i<noteclass.length;i++){
-            noteclass[i].addEventListener("move",fuction(e){
-                console.log(e);
-            })
+        function updatePosition(e,){
         }
+        var buttonupdate = document.getElementById("update");
+        buttonupdate.addEventListener('click',getJSON);
+        
     </script>
 
 
