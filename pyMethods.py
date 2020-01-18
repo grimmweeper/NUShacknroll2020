@@ -12,9 +12,11 @@ cred = credentials.Certificate(filepath)
 
 class DB:
     def __init__(self):
-        print("hihihi")
-        firebase_admin.initialize_app(cred)
-        self.db = firestore.client()
+        try: 
+            firebase_admin.initialize_app(cred)
+            self.db = firestore.client()
+        except(e):
+            print("stillworks??")
 
     def board_ref(self,board_name):
         return self.Board(self,board_name)
@@ -104,16 +106,23 @@ class DB:
             self.write_document("members", data)
 
         def delete_task(self, section_name, msg):
-            data = self.read_members()
-            del data[msg]
+            data = self.read_tasks()
+            print(data)
+            section = data[section_name]
+            del section[msg]
             self.write_document("sections", data)
 
+db = DB()
+board = db.Board(db,"test4")
+print(board.read_members())
+board.add_member("@hihithisisme","lexuan","smilely")
+print(board.read_members())
+print("=======================================================================")
+board.add_task("todo","HELLO THERE","frown")
+print(board.read_tasks())
+board.delete_task("todo","HELLO THERE")
+print(board.read_tasks())
 
-
-
-# db = DB()
-# board = db.Board(db,"test4")
-# print(board.get_members)
 
 app = Flask(__name__)
 
