@@ -32,3 +32,5 @@ var newnote = document.getElementById("newnote");
 newnote.addEventListener('click',addNewNote);
 $('.note').draggable();
 $('.note').resizable({'aspectRatio' :true});
+
+

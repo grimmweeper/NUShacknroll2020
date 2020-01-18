@@ -1,10 +1,12 @@
-populateNotes(fetchNotes());
+fetchNotes().then(function(val){
+    populateNotes(val);
+});
 
-function fetchNotes(){
+async function fetchNotes(){
     //fetch from firebase the notecollection, and parse document name as its title
     var notecollection;
     var checker = false;
-    $.ajax({
+    return $.ajax({
         url: '/',
         data:"test4",
         type: 'POST',
@@ -17,15 +19,7 @@ function fetchNotes(){
             console.log(error);
         }
     });
-    // $.get( "/", function( data ) {
-        
-    //     console.log(data);
-    //   });
-    while(checker){
-
-    }
-    
-    return notecollection;
+   
 }
 
 function populateNotes(notecollection){
