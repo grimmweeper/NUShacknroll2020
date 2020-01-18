@@ -4,7 +4,7 @@ It provides updates on how project members are working on different tasks of the
 """
 import logging
 import telegram
-from database.pyMethods import DB
+from pyMethods import DB
 
 from telegram.error import NetworkError, Unauthorized
 from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove,ParseMode)
@@ -18,10 +18,12 @@ update_id = None
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
-PROJECT_NAME, MEMBERS,MEMBERS2, START_PROJECT = range(4)
+PROJECT_NAME, MEMBERS,MEMBERS2, EMOJI, LAST_EMOJI, START_PROJECT = range(6)
 user_data = dict()
 
 def start(update, context):
+    db = DB()
+    user_data['board'] = db.Board(db, "test2")
     update.message.reply_text(
         "Hello! Let's start a project! What would you like to name this project?"
     )
@@ -43,26 +45,48 @@ def project_name(update, context):
 
 
 def add_members(update, context):
-    user_data['members'] = int(update.message.text) -1
+    user_data['members'] = int(update.message.text)
     user_data['members_list'] = []
+    user_data['emoji_list'] = []
     update.message.reply_text("Who's in the project?")
     return MEMBERS2
 
 def add_members2(update,context):
     members_list = user_data.get('members_list')
     members_list.append(update.message.text)
-    update.message.reply_text("Alright! Who's the next members?")
     members = user_data.get('members') -1
     user_data['members'] = members
+    update.message.reply_text("What is {}'s emoji?".format(members_list[-1]))
     if members>0:
-        return MEMBERS2
+        return EMOJI
     else:
         return START_PROJECT
 
+
+def add_emoji(update,context):
+    user = update.message.from_user
+    emoji_list = user_data.get('emoji_list')
+    emoji_list.append(update.message.text)
+    members_list = user_data.get('members_list')
+    board = user_data['board'].add_member(handle = user.first_name, name=members_list[-1],emoji=emoji_list[-1])
+    update.message.reply_text("Alright! Who's the next members?")
+    return MEMBERS2
+
+def add_last_emoji(update,context):
+    user = update.message.from_user
+    emoji_list = user_data.get('emoji_list')
+    emoji_list.append(update.message.text)
+    members_list = user_data.get('members_list')
+    board = user_data['board'].add_member(handle = user.first_name ,name=members_list[-1], emoji=emoji_list[-1])
+    update.message.reply_text("What is {}'s emoji?".format(members_list[-1]))
+    return START_PROJECT
+
+
+
+
+
 def start_project(update, context):
     update.message.reply_text("Here's your project code: #1234\n")
-    db = DB()
-    user_data['board'] = db.Board(db, "test4")
     return -1
 
 def show_tasks(update,context):
@@ -85,6 +109,11 @@ def show_tasks(update,context):
     update.message.reply_text(reply_text,ParseMode.MARKDOWN)
     reply_text += "\n"
 
+def show_members(update,context):
+    data = user_data.get('board').read_members()
+    update.message.reply_text(data)
+
+
 def cancel(update, context):
     print("there was some problem")
 
@@ -104,7 +133,9 @@ def main():
         states={
             PROJECT_NAME: [MessageHandler(Filters.text, project_name)],
             MEMBERS: [MessageHandler(Filters.text, add_members)],
-            MEMBERS2 : [MessageHandler(Filters.text,add_members2)],
+            MEMBERS2: [MessageHandler(Filters.text,add_members2)],
+            EMOJI: [MessageHandler(Filters.text,add_emoji)],
+            LAST_EMOJI: [MessageHandler(Filters.text,add_last_emoji)],
             START_PROJECT: [MessageHandler(None, start_project)]
         },
         fallbacks=[CommandHandler('cancel', cancel)],
@@ -112,6 +143,7 @@ def main():
     dp.add_handler(conv_handler)
 
     dp.add_handler(CommandHandler("showTasks", show_tasks))
+    dp.add_handler(CommandHandler("showMembers", show_members))
 
     updater.start_polling()
 
