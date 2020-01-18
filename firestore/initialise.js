@@ -21,11 +21,11 @@ function createCollection(db){
     });
 }
 
-function initBoard(db,boardName){
+function createBoard(db,boardName){
   let coll = db.collection(boardName);
-
-  // Setting sections document
-  let sections = coll.doc("sections");
+  let todo = coll.doc("todo");
+  let doing = coll.doc("doing");
+  let done = coll.doc("done");
 
   let todoConfig = {
     title: "todo",
@@ -66,30 +66,13 @@ function initBoard(db,boardName){
     }
   }
 
-  sections.set({
-    todo: todoConfig,
-    doing: doingConfig,
-    done: doneConfig
-  });
-  
-  // creating other documents (empty for now)
-  coll.doc("members").set({});
-  coll.doc("agenda").set({});
+  todo.set(todoConfig);
+  doing.set(doingConfig);
+  done.set(doneConfig);
 }
 
-function editDoc(coll,document,data){
-  coll.document.set(data);
-}
-
-function readDoc(db,collName,docName) {
-  return db.collection(collName).doc(docName).get();
-}
-
-function mainCall() {
-  let db = initialise();
-  // initBoard(db,"test2");
-  let print = readDoc(db,"test2","members");
-  console.log(print);
-  return print;
+function onClick() {
+    let db = initialise();
+    createBoard(db,"weepz");
 }
 
