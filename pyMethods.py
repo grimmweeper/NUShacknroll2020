@@ -16,7 +16,7 @@ class DB:
             firebase_admin.initialize_app(cred)
             self.db = firestore.client()
         except:
-            print("stillworks??")
+            firebase_admin.initialize_app(cred,)
 
     def board_ref(self,board_name):
         return self.Board(self,board_name)
@@ -96,9 +96,9 @@ class DB:
             section[msg] = emoji
             self.write_document("sections", data)
 
-        def add_member(self, handle, name, emoji, color="white"):
+        def add_member(self, name, emoji, color="white"):
             data = self.read_members()
-            data[handle] = {
+            data[name] = {
                 'name': name,
                 'color': color,
                 'emoji': emoji
