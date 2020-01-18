@@ -169,7 +169,7 @@ def update_sections_flask():
         board = DB().board_ref(data['board_name'])
         board.overwrite_sections(data['data'])
         print("added successfully")
-
+    return "hello"
 
 @app.route('/index/',methods=["GET","POST"])
 def ind():

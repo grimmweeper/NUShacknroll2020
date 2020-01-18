@@ -12,13 +12,14 @@
     <div id = "newnote" class="newnote">
         click for new note
     </div>
-    
+
+    <button type="button" id="update">update</button>
+
     <img src="{{ url_for('static', filename='delete.png') }}" id ="trash">
     
     <div id="noteslist" class="notes">
     </div>
 
-    <button type="button" id="update">update</button>
 
     <script src="{{ url_for('static', filename='newnote.js') }}"></script>
     <script src="{{ url_for('static', filename='initialisation.js') }}"></script>
@@ -35,25 +36,25 @@
         function getJSON(){
             var totalnotes = document.getElementsByClassName('note');
             var jsonobject = {};
-            for(section in totalnotes){
-                var actualsection = totalnotes[section];
-                var title = actualsection.getElementsByClassName('title')[0];
+            for(var j=0;j<totalnotes.length;j++){
+                var actualsection = totalnotes[j];
+                var title = actualsection.getElementsByClassName('title')[0].innerHTML;
                 var body = actualsection.getElementsByClassName('body');
                 var actualbody = {};
-                for(i in body){
-                    var text = body[i];
+                for(var i=0; i<body.length;i++){
+                    var text = body[i].innerHTML;
                     var keyvalue = text.split(":");
                     actualbody[keyvalue[0]]=keyvalue[1];
                 }
                 var children = actualsection["body"];
-                jsonobject[title]={'left':actualsection.style.left,'top':actualsection.style.top,'width':actualsection.style.width,'height':actualsection.style.height,'body':actualbody,'color':actualsection.style.color,'title':title};
+                jsonobject[title]={'left':actualsection.style.left,'top':actualsection.style.top,'width':actualsection.style.width,'height':actualsection.style.height,'body':actualbody,'color':actualsection.style.backgroundColor,'title':title};
             }
-            console.log(jsonobject);
+            
             var finaljsonobject = {'board_name':"test5",'data':jsonobject};
 
             $.ajax({
             url: '/addTask/',
-            data:JSON.stringify(finaljsonobject),
+            data: JSON.stringify(finaljsonobject),
             type: 'POST',
             success: function(response){
                 console.log(response);

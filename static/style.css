@@ -21,8 +21,8 @@ html {
     font-size: 1.5rem;
     padding: 1rem .5rem;
     transition: all .07s ease;
-    width: 10rem;
-    height: 5rem;
+    width: 100px;
+    height: 100px;
     text-align: center;
     color: white;
     background: rgb(172, 18, 18);
