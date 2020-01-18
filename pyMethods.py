@@ -16,7 +16,8 @@ class DB:
             firebase_admin.initialize_app(cred)
             self.db = firestore.client()
         except:
-            firebase_admin.initialize_app(cred,)
+            firebase_admin.get_app()
+            self.db = firestore.client()
 
     def board_ref(self,board_name):
         return self.Board(self,board_name)
