@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>twello</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel = "stylesheet" type="text/css"/>
+    <script src="{{ url_for('static', filename='jquery-ui-1.12.1/external/jquery/jquery.js') }}" type = "text/javascript"></script>
+    <script src="{{ url_for('static', filename='jquery-ui-1.12.1/jquery-ui.min.js') }}" type="text/javascript"></script>
+</head>
+<body>
+    <!-- initialize tools-->
+    <div id = "newnote" class="newnote">
+        click for new note
+    </div>
+    
+    <img src="{{ url_for('static', filename='delete.png') }}" id ="trash">
+    
+    <div id="noteslist" class="notes">
+    </div>
+
+    <script src="{{ url_for('static', filename='newnote.js') }}"></script>
+    <script src="{{ url_for('static', filename='initialisation.js') }}"></script>
+    <script>
+        // trashbin script
+        $('#trash').droppable({
+        drop:function(event,ui){
+            $( ui.draggable ).remove();
+        }
+    });
+    </script>
+
+
+    
+</body>
+
+</html>
