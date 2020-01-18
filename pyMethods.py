@@ -92,7 +92,7 @@ class DB:
         def write_document(self, document_name, data):
             self.board.document(document_name).set(data)
 
-        def add_task(self, section_name, msg, emoji):
+        def add_task(self, section_name, msg, emoji = ""):
             data = self.read_tasks()
             section = data[section_name]
             section[msg] = emoji
@@ -112,6 +112,23 @@ class DB:
             section = data[section_name]
             del section[msg]
             self.write_document("sections", data)
+
+        def move_task(self, section_from, section_to, msg):
+            data = self.read_tasks()
+            section_from = data[section_from]
+            section_to = data[section_to]
+            section_to[msg] = section_from[msg]
+
+            del section_from[msg]
+
+        def assign_task(self, section_name, msg, emoji):
+            data = self.read_tasks()
+            section = data[section_name]
+            section[msg] = emoji
+            
+
+
+            
 
 # db2 = DB()
 # db = DB()
