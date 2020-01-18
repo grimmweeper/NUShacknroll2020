@@ -1,8 +1,9 @@
 html {
     font-size: 10px;
     background: url(https://cdn.es.tiendas.com/images/LqWeu2YRst7OCAg5XmZ9EAef%2BZeRXL1Am2vbOQvfxeNonY7vOvpfh1Htl7YcP2tVLCVHaOx7lerKs%2BAx7c0t%2FN2w3i5L4pbnD0JhZw13L%2FMc5RNJzKbLNNoO9ENBqUVvY0HIoYXghgMuywSEOBcGrg%3D%3D.jpeg);
-    background-size: auto;
-    background-position: 50% -110%;
+    width: 100%;
+    height: 100%;
+    background-position: center;
     background-repeat: no-repeat;
     overflow: hidden;
   }
@@ -12,9 +13,7 @@ html {
     padding: 0;
     font-family: sans-serif;
   }
-  div{
-      resize: both;
-  }
+
   .newnote {
     border: .4rem solid black;
     border-radius: .5rem;
@@ -29,7 +28,14 @@ html {
     background: rgb(172, 18, 18);
     text-shadow: 0 0 .5rem black;
   }
-
+  
+  #trash{
+    width: 100px;
+    height: 100px;
+    left: 20px;
+    top: 110px;
+    position: absolute;
+  }
   .notes {
     display: flex;
     flex: 1;
@@ -37,7 +43,9 @@ html {
     align-items: center;
     justify-content: center;
   }
-
+  .ui-resizable {
+    position: absolute !important;
+  }
   .note {
     border: .1rem solid black;
     border-radius: 1rem;
@@ -45,30 +53,24 @@ html {
     font-size: 1.5rem;
     padding: 1rem .5rem;
     transition: all .07s ease;
+    position: fixed;
     width: 15rem;
     height: 30rem;
-    text-align: center;
     color: white;
     background: rgba(0,0,0,1);
     text-shadow: 0 0 .5rem black;
-    resize: both;
+  }
 
+  .title {
+    text-shadow: 0 0 .5rem black;
+    text-align: center;
+    font-weight: 700;
+    font-size: large;
+  }
+
+  .body {
+    text-shadow: 0 0 .5rem black;
+    font-weight: normal;
+    font-size: medium;
   }
   
-  .playing {
-    transform: scale(1.1);
-    border-color: #ffc600;
-    box-shadow: 0 0 1rem #ffc600;
-  }
-  
-  kbd {
-    display: block;
-    font-size: 4rem;
-  }
-  
-  .sound {
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: .1rem;
-    color: #ffc600;
-  }

@@ -15,7 +15,6 @@
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
-
     <script>
     // Your web app's Firebase configuration
     var firebaseConfig = {
@@ -30,31 +29,56 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     </script>
-    
+    <!-- initialize tools-->
     <div id = "newnote" class="newnote">
         click for new note
     </div>
     
+    <img src="delete.png" id ="trash">
+    
     <div id="noteslist" class="notes">
-        <div id="movable" class = "note" contenteditable="true">
-            hello
+        <div class = "note" contenteditable="true">
+            <div contenteditable="true" class='title'> Title </div>
+            <div contenteditable="true" class='body'>type here </div>
         </div>
-
     </div>
 
     <script>
+        //script below adds functionality to new notes added.
         var newnote = document.getElementById("newnote");
         newnote.addEventListener('click',function(e){
             var notenode = document.createElement('div');                
-            notenode.innerHTML = "TEST";
             notenode.classList.add('note');
-            notenode.contentEditable="true";
+            notenode.contentEditable='true';
+            var header = document.createElement("header");
+            header.innerHTML = "Title"
+            header.contentEditable = "true";
+            header.classList.add('title')
+            notenode.appendChild(header);
+            var body = document.createElement("body");
+            body.innerHTML = "type here"
+            body.contentEditable="true";
+            body.classList.add('body');
+            notenode.appendChild(body);
             document.getElementById("noteslist").appendChild(notenode);
             $('.note').draggable();
-
+            $('.note').resizable({'aspectRatio' :true});
         });
+
         $('.note').draggable();
+        $('.note').resizable({'aspectRatio' :true});
+
     </script>
+
+    <script>
+        // trashbin script
+        $('#trash').droppable({
+        drop:function(event,ui){
+            $( ui.draggable ).remove();
+        }
+    });
+    </script>
+
     
 </body>
 
