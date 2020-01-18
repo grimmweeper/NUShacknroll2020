@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e01cc767-d406-4f2e-9b96-ae3815d71444" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Telegram/schedulo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Telegram/schedulo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyMethods.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyMethods.py" afterDir="false" />
-    </list>
+    <list default="true" id="e01cc767-d406-4f2e-9b96-ae3815d71444" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,7 +178,21 @@
       <option name="project" value="LOCAL" />
       <updated>1579365725490</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="asdf">
+      <created>1579367525632</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1579367525632</updated>
+    </task>
+    <task id="LOCAL-00008" summary="asdf">
+      <created>1579367590754</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1579367590754</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -204,7 +215,8 @@
     <MESSAGE value="asd" />
     <MESSAGE value="pushed lexuan changed" />
     <MESSAGE value="av" />
-    <option name="LAST_COMMIT_MESSAGE" value="av" />
+    <MESSAGE value="asdf" />
+    <option name="LAST_COMMIT_MESSAGE" value="asdf" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579341196142">
@@ -231,10 +243,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="507" y="28" key="#trial/0.0.1536.824@0.0.1536.824" timestamp="1579341773352" />
-    <state x="360" y="8" key="CommitChangelistDialog2" timestamp="1579367524820">
+    <state x="360" y="8" key="CommitChangelistDialog2" timestamp="1579367590046">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="360" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1579367524820" />
+    <state x="360" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1579367590046" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1579359650731">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -279,10 +291,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="481" y="129" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1579359475763" />
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1579367527616">
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1579367593397">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1579367527616" />
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1579367593397" />
     <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1579367058494">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -291,10 +303,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="407" y="28" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1579352900237" />
-    <state x="468" y="205" key="git4idea.merge.GitPullDialog" timestamp="1579367544548">
+    <state x="468" y="205" key="git4idea.merge.GitPullDialog" timestamp="1579367644721">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="468" y="205" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1579367544548" />
+    <state x="468" y="205" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1579367644721" />
     <state x="425" y="66" width="670" height="676" key="search.everywhere.popup" timestamp="1579358732947">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
