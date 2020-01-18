@@ -6,6 +6,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from os import path
 from flask import Flask, render_template, request
+import json
 
 basepath = path.dirname(__file__)
 filepath = path.abspath(path.join(basepath, ".", ".", "schedulo-18432-621fa7d3e711.json"))
@@ -94,7 +95,7 @@ class DB:
         def write_document(self, document_name, data):
             self.board.document(document_name).set(data)
 
-        def add_task(self, section_name, msg, emoji):
+        def add_task(self, section_name, msg, emoji = ""):
             data = self.read_tasks()
             section = data[section_name]
             section[msg] = emoji
@@ -115,17 +116,34 @@ class DB:
             del section[msg]
             self.write_document("sections", data)
 
-db2 = DB()
-db = DB()
-board = db.Board(db,"test4")
-print(board.read_members())
-board.add_member("@hihithisisme","lexuan","smilely")
-print(board.read_members())
-print("=======================================================================")
-board.add_task("todo","HELLO THERE","frown")
-print(board.read_tasks())
-board.delete_task("todo","HELLO THERE")
-print(board.read_tasks())
+        def move_task(self, section_from, section_to, msg):
+            data = self.read_tasks()
+            section_from = data[section_from]
+            section_to = data[section_to]
+            section_to[msg] = section_from[msg]
+
+            del section_from[msg]
+
+        def assign_task(self, section_name, msg, emoji):
+            data = self.read_tasks()
+            section = data[section_name]
+            section[msg] = emoji
+            
+
+
+            
+
+# db2 = DB()
+# db = DB()
+# board = db.Board(db,"test4")
+# print(board.read_members())
+# board.add_member("@hihithisisme","lexuan","smilely")
+# print(board.read_members())
+# print("=======================================================================")
+# board.add_task("todo","HELLO THERE","frown")
+# print(board.read_tasks())
+# board.delete_task("todo","HELLO THERE")
+# print(board.read_tasks())
 
 
 app = Flask(__name__)
@@ -142,8 +160,16 @@ def echo():
     else:
         return {"title": "To-Do","body":["lexy","gab","weepz"],"color":"red","height":"300px","width":"100px","left":"200px","top":"100px"}
 
-# @app.route('/addTask/',methods=["GET","POST"])
-# def add_task_flask()
+@app.route('/addTask/',methods=["GET","POST"])
+def add_task_flask():
+    if request.method == "POST":
+        print("adding task now")
+        data = json.loads(request.get_data().decode("utf-8"))
+        print(data)
+        board = DB().board_ref(data['board_name'])
+        board.add_task(data['section_name'],data['msg'],data['emoji'])
+        print("added successfully")
+
 
 @app.route('/index/',methods=["GET","POST"])
 def ind():
