@@ -33,7 +33,7 @@ class DB:
             self.db = outer_instance.db
             self.board = self.db.collection(board_name)
 
-        def create_from_template(self,board_name):
+        def create_from_template(self):
             
             sections = self.board.document("sections")
 
@@ -95,6 +95,9 @@ class DB:
         def write_document(self, document_name, data):
             self.board.document(document_name).set(data)
 
+        def overwrite_sections(self,data):
+            self.write_document("sections",data)
+
         def add_task(self, section_name, msg, emoji = ""):
             data = self.read_tasks()
             section = data[section_name]
@@ -129,11 +132,10 @@ class DB:
             section = data[section_name]
             section[msg] = emoji
 
-
-
-# db2 = DB()
-# db = DB()
-# board = db.Board(db,"test4")
+db2 = DB()
+db = DB()
+board = db.Board(db,"test5")
+board.create_from_template()
 # print(board.read_members())
 # board.add_member("@hihithisisme","lexuan","smilely")
 # print(board.read_members())
@@ -159,13 +161,13 @@ def echo():
         return {"title": "To-Do","body":["lexy","gab","weepz"],"color":"red","height":"300px","width":"100px","left":"200px","top":"100px"}
 
 @app.route('/addTask/',methods=["GET","POST"])
-def add_task_flask():
+def update_sections_flask():
     if request.method == "POST":
         print("adding task now")
         data = json.loads(request.get_data().decode("utf-8"))
         print(data)
         board = DB().board_ref(data['board_name'])
-        board.add_task(data['section_name'],data['msg'],data['emoji'])
+        board.overwrite_sections(data['data'])
         print("added successfully")
 
 
