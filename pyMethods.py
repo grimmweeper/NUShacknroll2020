@@ -15,7 +15,7 @@ class DB:
         try: 
             firebase_admin.initialize_app(cred)
             self.db = firestore.client()
-        except(e):
+        except:
             print("stillworks??")
 
     def board_ref(self,board_name):
@@ -107,11 +107,11 @@ class DB:
 
         def delete_task(self, section_name, msg):
             data = self.read_tasks()
-            print(data)
             section = data[section_name]
             del section[msg]
             self.write_document("sections", data)
 
+db2 = DB()
 db = DB()
 board = db.Board(db,"test4")
 print(board.read_members())
