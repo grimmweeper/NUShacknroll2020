@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e01cc767-d406-4f2e-9b96-ae3815d71444" name="Default Changelist" comment="" />
+    <list default="true" id="e01cc767-d406-4f2e-9b96-ae3815d71444" name="Default Changelist" comment="asdf">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -192,7 +194,21 @@
       <option name="project" value="LOCAL" />
       <updated>1579367590754</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="asdf">
+      <created>1579367682093</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1579367682093</updated>
+    </task>
+    <task id="LOCAL-00010" summary="asdf">
+      <created>1579367706018</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1579367706018</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -243,10 +259,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="507" y="28" key="#trial/0.0.1536.824@0.0.1536.824" timestamp="1579341773352" />
-    <state x="360" y="8" key="CommitChangelistDialog2" timestamp="1579367695999">
+    <state x="406" y="2" key="CommitChangelistDialog2" timestamp="1579367858889">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="360" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1579367695999" />
+    <state x="406" y="2" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1579367858889" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1579359650731">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -291,10 +307,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="481" y="129" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1579359475763" />
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1579367699095">
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1579367847351">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1579367699095" />
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1579367847351" />
     <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1579367058494">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -311,16 +327,5 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="66" width="670" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1579358732947" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Telegram/schedulo.py</url>
-          <line>134</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
