@@ -103,7 +103,12 @@ class DB:
             }
             self.write_document("members", data)
 
-        # def delete_task(self, section_name, msg):
+        def delete_task(self, section_name, msg):
+            data = self.read_members()
+            del data[msg]
+            self.write_document("sections", data)
+
+
 
 
 # db = DB()
