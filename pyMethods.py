@@ -134,7 +134,7 @@ class DB:
 
 db2 = DB()
 db = DB()
-board = db.Board(db,"test5")
+board = db.Board(db,"test3")
 board.create_from_template()
 # print(board.read_members())
 # board.add_member("@hihithisisme","lexuan","smilely")
@@ -169,6 +169,8 @@ def update_sections_flask():
         board = DB().board_ref(data['board_name'])
         board.overwrite_sections(data['data'])
         print("added successfully")
+    return None
+    
 
 
 @app.route('/index/',methods=["GET","POST"])
