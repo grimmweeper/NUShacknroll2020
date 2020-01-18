@@ -37,10 +37,10 @@ class DB:
             todoData = {
                 "title": "todo",
                 "color": "red",
-                "height": 300,
-                "width": 100,
-                "left": 200,
-                "top": 100,
+                "height": "300px",
+                "width": "100px",
+                "left": "200px",
+                "top": "100px",
                 "body": {
                 "msg1": "emoji",
                 "msg2": "emoji"
@@ -49,10 +49,10 @@ class DB:
             doingData = {
                 "title": "doing",
                 "color": "grey",
-                "height": 300,
-                "width": 100,
-                "left": 200,
-                "top": 100,
+                "height": "300px",
+                "width": "100px",
+                "left": "200px",
+                "top": "100px",
                 "body": {
                 "msg1": "emoji",
                 "msg2": "emoji"
@@ -61,10 +61,10 @@ class DB:
             doneData = {
                 "title": "done",
                 "color": "black",
-                "height": 300,
-                "width": 100,
-                "left": 200,
-                "top": 100,
+                "height": "300px",
+                "width": "100px",
+                "left": "200px",
+                "top": "100px",
                 "body": {
                 "msg1": "emoji",
                 "msg2": "emoji"
@@ -125,10 +125,8 @@ class DB:
             data = self.read_tasks()
             section = data[section_name]
             section[msg] = emoji
-            
 
 
-            
 
 # db2 = DB()
 # db = DB()
