@@ -7,6 +7,7 @@
     <link href="jquery-ui-1.12.1/jquery-ui.min.css" rel = "stylesheet" type="text/css"/>
     <script src="jquery-ui-1.12.1/external/jquery/jquery.js" type = "text/javascript"></script>
     <script src="jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -37,38 +38,10 @@
     <img src="delete.png" id ="trash">
     
     <div id="noteslist" class="notes">
-        <div class = "note" contenteditable="true">
-            <div contenteditable="true" class='title'> Title </div>
-            <div contenteditable="true" class='body'>type here </div>
-        </div>
     </div>
 
-    <script>
-        //script below adds functionality to new notes added.
-        var newnote = document.getElementById("newnote");
-        newnote.addEventListener('click',function(e){
-            var notenode = document.createElement('div');                
-            notenode.classList.add('note');
-            notenode.contentEditable='true';
-            var header = document.createElement("header");
-            header.innerHTML = "Title"
-            header.contentEditable = "true";
-            header.classList.add('title')
-            notenode.appendChild(header);
-            var body = document.createElement("body");
-            body.innerHTML = "type here"
-            body.contentEditable="true";
-            body.classList.add('body');
-            notenode.appendChild(body);
-            document.getElementById("noteslist").appendChild(notenode);
-            $('.note').draggable();
-            $('.note').resizable({'aspectRatio' :true});
-        });
-
-        $('.note').draggable();
-        $('.note').resizable({'aspectRatio' :true});
-
-    </script>
+    <script src="newnote.js"></script>
+    <script src="initialisation.js"></script>
 
     <script>
         // trashbin script
@@ -78,6 +51,7 @@
         }
     });
     </script>
+
 
     
 </body>
