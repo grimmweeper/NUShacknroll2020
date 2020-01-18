@@ -4,6 +4,7 @@ It provides updates on how project members are working on different tasks of the
 """
 import logging
 import telegram
+import pyMethods.py
 from telegram.error import NetworkError, Unauthorized
 from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove)
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
@@ -61,10 +62,12 @@ def add_members2(update,context):
 
 def start_project(update, context):
     update.message.reply_text("Here's your project code: #1234\n")
+    db = DB()
+    user_data['board'] = db.Board(db, "test4")
     return CANCEL
 
 def show_tasks(update,context):
-    #some how get from firestore
+    #some how get from firestore with board
 
 def cancel(update, context):
     print("there was some problem")
