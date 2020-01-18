@@ -29,6 +29,32 @@
     });
     </script>
 
+    <script>
+        function updatePosition(e){
+            $.ajax({
+            url: '/addTask/',
+            data:"test4",
+            type: 'POST',
+            success: function(response){
+                console.log(response);
+                notecollection=response;
+                checker = true;
+
+            },
+            error: function(error){
+                console.log(error);
+            }
+        })
+
+        }
+        var noteclass = document.getElementsByClassName('note');
+        for(var i=0;i<noteclass.length;i++){
+            noteclass[i].addEventListener("move",fuction(e){
+                console.log(e);
+            })
+        }
+    </script>
+
 
     
 </body>
