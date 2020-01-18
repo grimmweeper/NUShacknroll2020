@@ -88,12 +88,12 @@ class DB:
         def read_tasks(self):
             return self.read_document("sections")
 
-db = DB()
-print(db.check_if_board_populated("test4"))
-
-board = db.Board(db, "test4")
-data = board.read_document("sections")
-print(data['done']['body'])
+# db = DB()
+# print(db.check_if_board_populated("test4"))
+#
+# board = db.Board(db, "test4")
+# data = board.read_document("sections")
+# print(data['done']['body'])
 
 # app = Flask(__name__)
 #
