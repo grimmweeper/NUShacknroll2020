@@ -1,7 +1,28 @@
 fetchNotes().then(function(val){
     populateNotes(val);
 });
+// fetchMessages().then()
 
+function populateMessages(json){
+    json = JSON.parse(json);
+    for(msg in json['data']){
+        console.log(msg);
+    }
+}
+
+async function fetchMessages(){
+    return $.ajax({
+        url: '/fetchMessages',
+        data:"test5",
+        type: 'POST',
+        success: function(response){
+            console.log(response);
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
 async function fetchNotes(){
     //fetch from firebase the notecollection, and parse document name as its title
     return $.ajax({
@@ -27,14 +48,30 @@ function populateNotes(notecollection){
     }
 }
 
+function addnewText(e){
+    var content = "content here: emoji here" ; 
+    var body1 = document.createElement("body");
+    body1.innerHTML = content;
+    body1.contentEditable="true";
+    body1.classList.add('body');
+    var listofbody = this.parentNode.getElementsByClassName('body');
+    this.parentNode.insertBefore(body1,listofbody[listofbody.length-1].nextSibling);
+    $('.body').draggable();
+
+}
 function addNewNote(title="title",body={"enter text here":"emoji"},color="green",height="300px",width="100px",left="500px",top="500px"){
     var notenode = document.createElement('div');                
     notenode.classList.add('note');
     notenode.contentEditable='true';
+    var button = document.createElement('button');
+    button.style.right = '0px';
+    button.style.top = '0px';
+    notenode.appendChild(button);
+    button.addEventListener('click',addnewText);
     var header = document.createElement("header");
     header.innerHTML = title;
     header.contentEditable = "true";
-    header.classList.add('title')
+    header.classList.add('title');
     notenode.appendChild(header);
     const keys = Object.keys(body);
     for(key in keys){
@@ -53,5 +90,19 @@ function addNewNote(title="title",body={"enter text here":"emoji"},color="green"
 
     document.getElementById("noteslist").appendChild(notenode);
     $('.note').draggable();
+    $('.note').droppable({
+        drop:function(event,ui){
+            console.log(this);
+            var listofbody = this.getElementsByClassName('body');
+                
+            this.insertBefore($( ui.draggable )[0],listofbody[listofbody.length-1].nextSibling);
+            listofbody= this.getElementsByClassName('body');
+            listofbody[listofbody.length-1].style.left = "0px";
+            listofbody[listofbody.length-1].style.top = "0px";
+
+            
+        }
+    });
+    $('.body').draggable();
     $('.note').resizable({'aspectRatio' :true});
 }

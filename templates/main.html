@@ -50,7 +50,7 @@
                 jsonobject[title]={'left':actualsection.style.left,'top':actualsection.style.top,'width':actualsection.style.width,'height':actualsection.style.height,'body':actualbody,'color':actualsection.style.backgroundColor,'title':title};
             }
             
-            var finaljsonobject = {'board_name':"test5",'data':jsonobject};
+            var finaljsonobject = {'board_name':'{{ board }}','data':jsonobject};
 
             $.ajax({
             url: '/addTask/',
