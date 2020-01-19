@@ -59,7 +59,7 @@ class DB:
                 "color": "grey",
                 "height": "300px",
                 "width": "100px",
-                "left": "200px",
+                "left": "400px",
                 "top": "100px",
                 "body": {}
             }
@@ -68,7 +68,7 @@ class DB:
                 "color": "black",
                 "height": "300px",
                 "width": "100px",
-                "left": "200px",
+                "left": "600px",
                 "top": "100px",
                 "body": {}
             }
@@ -80,7 +80,7 @@ class DB:
             })
 
             self.board.document("members").set({})
-            self.board.document("pinned").set({})
+            self.board.document("pinned").set({'data':[]})
 
         def read_document(self,document_name):
             return self.board.document(document_name).get().to_dict()
@@ -150,7 +150,9 @@ class DB:
             data_write = {'data':pinned}
             self.write_document("pinned",data_write)
             
-
+db = DB()
+board = db.board_ref("DBS")
+board.create_from_template()
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
