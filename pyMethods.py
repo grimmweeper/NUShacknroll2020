@@ -200,8 +200,10 @@ def update_sections_flask():
 >>>>>>> 73fdbba8e2597974171207a628be70a66b9c5ed3
 @app.route('/index/',methods=["GET","POST"])
 def ind():
-    board = session['board']
-    return render_template("main.html",board = board)
+    board_name = session['board']
+    board = DB().board_ref(board_name)
+    pinned_data = board.read_pinned()
+    return render_template("main.html",board = board,pinned_data = pinned_data)
 
 @app.route('/login/', methods=["GET","POST"])
 def login():
