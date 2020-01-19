@@ -33,6 +33,13 @@ class DB:
             self.db = outer_instance.db
             self.board = self.db.collection(board_name)
 
+        def check_if_empty(self):
+            docs = self.board.stream()
+            empty = True
+            for doc in docs:
+                empty = False
+            return empty
+
         def create_from_template(self):
             
             sections = self.board.document("sections")
@@ -44,10 +51,7 @@ class DB:
                 "width": "100px",
                 "left": "200px",
                 "top": "100px",
-                "body": {
-                "msg1": "emoji",
-                "msg2": "emoji"
-                }
+                "body": {}
             }
             doingData = {
                 "title": "doing",
@@ -56,10 +60,7 @@ class DB:
                 "width": "100px",
                 "left": "200px",
                 "top": "100px",
-                "body": {
-                "msg1": "emoji",
-                "msg2": "emoji"
-                }
+                "body": {}
             }
             doneData = {
                 "title": "done",
@@ -68,10 +69,7 @@ class DB:
                 "width": "100px",
                 "left": "200px",
                 "top": "100px",
-                "body": {
-                "msg1": "emoji",
-                "msg2": "emoji"
-                }
+                "body": {}
             }
 
             sections.set({
@@ -81,7 +79,7 @@ class DB:
             })
 
             self.board.document("members").set({})
-            self.board.document("agenda").set({})
+            self.board.document("pinned").set({})
 
         def read_document(self,document_name):
             return self.board.document(document_name).get().to_dict()
@@ -100,10 +98,9 @@ class DB:
 
         def add_task(self, section_name, msg, emoji = ""):
             data = self.read_tasks()
-            section = data[section_name]
-            section[msg] = emoji
+            section_body = data[section_name]["body"]
+            section_body[msg] = emoji
             self.write_document("sections", data)
-            print(msg)
 
         def add_member(self, name, emoji, color="white"):
             data = self.read_members()
@@ -133,10 +130,23 @@ class DB:
             section = data[section_name]
             section[msg] = emoji
 
-db2 = DB()
-db = DB()
-board = db.Board(db,"test3")
-board.create_from_template()
+        def read_pinned(self):
+            return self.read_document("pinned")
+
+        def add_pinned(self,add_data):
+            self.write_document("pinned",add_data)
+
+        def del_pinned(self,del_msg):
+            pinned = self.read_document("pinned")
+            del pinned[del_msg]
+
+
+# db2 = DB()
+# db = DB()
+# board = db.board_ref("test10")
+# print(board.check_if_empty())
+# board.create_from_template()
+# board.add_task("todo","hihinoticemesenpai!")
 # print(board.read_members())
 # board.add_member("@hihithisisme","lexuan","smilely")
 # print(board.read_members())
