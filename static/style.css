@@ -18,20 +18,23 @@ html {
     border: .4rem solid black;
     border-radius: .5rem;
     margin: 1rem;
-    font-size: 1.5rem;
+    font-size: 20px;
     padding: 1rem .5rem;
     transition: all .07s ease;
-    width: 100px;
-    height: 100px;
+    
     text-align: center;
     color: white;
     background: rgb(172, 18, 18);
     text-shadow: 0 0 .5rem black;
     left: 20px;
     top: 110px;
-    position: absolute;
+  }
 
-
+  .button {
+    text-align: center;
+    width: 20px;
+    height: 10px;
+    position: fixed;
   }
   .newnote {
     border: .4rem solid black;
@@ -91,5 +94,6 @@ html {
     text-shadow: 0 0 .5rem black;
     font-weight: normal;
     font-size: medium;
+    position: static;
   }
   
