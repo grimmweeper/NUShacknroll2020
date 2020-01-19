@@ -132,13 +132,15 @@ class DB:
             section_body[msg] = emoji
 
         def read_pinned(self):
-            return self.read_document("pinned")
+            return self.read_document("pinned")['data']
 
         def add_pinned(self,add_data):
+            data = self.read_pinned()
+            data.append(add_data)
             self.write_document("pinned",add_data)
 
         def del_pinned(self,del_msg):
-            pinned = self.read_document("pinned")
+            pinned = self.read_pinned()
             del pinned[del_msg]
             
 
@@ -188,13 +190,12 @@ def update_sections_flask():
 @app.route('/index/',methods=["GET","POST"])
 def ind():
     board = session['board']
-    return render_template("main.html")
+    return render_template("main.html",board = board)
 
 @app.route('/login/', methods=["GET","POST"])
 def login():
     if request.method == "POST":
         print("posting info")
-        board_name = request.form.get("boardID")
         db = DB()
         board = db.board_ref(board_name)
         if board.check_if_empty():
