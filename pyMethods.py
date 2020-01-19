@@ -128,13 +128,17 @@ class DB:
 
         def add_pinned(self,add_data):
             self.write_document("pinned",add_data)
+
+        def del_pinned(self,del_msg):
+            pinned = self.read_document("pinned")
+            del pinned[del_msg]
             
 
-db2 = DB()
-db = DB()
-board = db.board_ref("test10")
+# db2 = DB()
+# db = DB()
+# board = db.board_ref("test10")
 # board.create_from_template()
-board.add_task("todo","hihinoticemesenpai!")
+# board.add_task("todo","hihinoticemesenpai!")
 # print(board.read_members())
 # board.add_member("@hihithisisme","lexuan","smilely")
 # print(board.read_members())
