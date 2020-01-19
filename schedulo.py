@@ -33,8 +33,6 @@ temp_data = []
 
 
 def start(update, context):
-    db = DB()
-    user_data['board'] = db.Board(db, "test3")
     update.message.reply_text(
         "Hello! Let's start a project! What would you like to name this project?"
     )
@@ -42,7 +40,11 @@ def start(update, context):
 
 
 def project_name(update, context):
-    name = update.message.text
+    name = str(update.message.text)
+    db = DB()
+    user_data['board'] = db.board_ref(name)
+    if db.board_ref(name).check_if_empty():
+        db.board_ref(name).create_from_template()
     update.message.reply_text(
         "Okay, Project " + name + " started!\n"
                                   "How many members do you have inside your project?",
@@ -160,7 +162,7 @@ def add_task_todo_3(update, context):
     update.message.reply_text(
         "Task Recorded! Use /showTasks to see the tasks."
     )
-
+    return -1
 
 def add_task_doing_1(update, context):
     data = user_data.get('board').read_members()
@@ -190,6 +192,7 @@ def add_task_doing_3(update, context):
     update.message.reply_text(
         "Task Recorded! Use /showTasks to see the tasks."
     )
+    return -1
 
 
 def add_task_done_1(update, context):
@@ -220,10 +223,8 @@ def add_task_done_3(update, context):
     update.message.reply_text(
         "Task Recorded! Use /showTasks to see the tasks."
     )
+    return -1
 
-
-def cancel(update, context):
-    print("there was some problem")
 
 
 ##############################################################
@@ -266,6 +267,11 @@ def moving_task_3(update, context):
     elif user_data['temp_data'] == "Doing":
         user_data['board'].move_task("doing", "done", update.message.text)
         print(update.message.text)
+
+    update.message.reply_text(
+        "Task moved! Use /showTasks to see the tasks."
+    )
+    return -1
 
 
 ##############################################################
@@ -319,7 +325,16 @@ def delete_task_3(update, context):
     elif user_data['temp_data'] == "Done":
         user_data['board'].delete_task("done", update.message.text)
 
+    update.message.reply_text(
+        "Task deleted! Use /showTasks to see the tasks."
+    )
+    return -1
 
+def cancel(update,context):
+    update.message.reply_text(
+        "Action Cancelled! What would you like to do now?"
+    )
+    return -1
 def main():
     """Run the bot."""
     global update_id
