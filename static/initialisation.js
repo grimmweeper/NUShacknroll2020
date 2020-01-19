@@ -2,27 +2,16 @@ fetchNotes().then(function(val){
     populateNotes(val);
 });
 // fetchMessages().then()
+populateMessages();
+function populateMessages(){
+    var json = '{{ pinned_data }}';
 
-function populateMessages(json){
-    json = JSON.parse(json);
-    for(msg in json['data']){
+    for(msg in json){
         console.log(msg);
     }
 }
 
-async function fetchMessages(){
-    return $.ajax({
-        url: '/fetchMessages',
-        data:"test5",
-        type: 'POST',
-        success: function(response){
-            console.log(response);
-        },
-        error: function(error){
-            console.log(error);
-        }
-    });
-}
+
 async function fetchNotes(){
     //fetch from firebase the notecollection, and parse document name as its title
     return $.ajax({

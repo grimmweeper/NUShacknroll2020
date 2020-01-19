@@ -5,8 +5,9 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from os import path
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,session, redirect
 import json
+import os
 
 basepath = path.dirname(__file__)
 filepath = path.abspath(path.join(basepath, ".", ".", "schedulo-18432-621fa7d3e711.json"))
@@ -33,6 +34,13 @@ class DB:
             self.db = outer_instance.db
             self.board = self.db.collection(board_name)
 
+        def check_if_empty(self):
+            docs = self.board.stream()
+            empty = True
+            for doc in docs:
+                empty = False
+            return empty
+
         def create_from_template(self):
             
             sections = self.board.document("sections")
@@ -44,10 +52,7 @@ class DB:
                 "width": "100px",
                 "left": "200px",
                 "top": "100px",
-                "body": {
-                "msg1": "emoji",
-                "msg2": "emoji"
-                }
+                "body": {}
             }
             doingData = {
                 "title": "doing",
@@ -56,10 +61,7 @@ class DB:
                 "width": "100px",
                 "left": "200px",
                 "top": "100px",
-                "body": {
-                "msg1": "emoji",
-                "msg2": "emoji"
-                }
+                "body": {}
             }
             doneData = {
                 "title": "done",
@@ -68,10 +70,7 @@ class DB:
                 "width": "100px",
                 "left": "200px",
                 "top": "100px",
-                "body": {
-                "msg1": "emoji",
-                "msg2": "emoji"
-                }
+                "body": {}
             }
 
             sections.set({
@@ -81,7 +80,7 @@ class DB:
             })
 
             self.board.document("members").set({})
-            self.board.document("agenda").set({})
+            self.board.document("pinned").set({})
 
         def read_document(self,document_name):
             return self.board.document(document_name).get().to_dict()
@@ -100,8 +99,8 @@ class DB:
 
         def add_task(self, section_name, msg, emoji = ""):
             data = self.read_tasks()
-            section = data[section_name]
-            section[msg] = emoji
+            section_body = data[section_name]["body"]
+            section_body[msg] = emoji
             self.write_document("sections", data)
 
         def add_member(self, name, emoji, color="white"):
@@ -115,27 +114,47 @@ class DB:
 
         def delete_task(self, section_name, msg):
             data = self.read_tasks()
-            section = data[section_name]
-            del section[msg]
+            section_body = data[section_name]["body"]
+            del section_body[msg]
             self.write_document("sections", data)
 
         def move_task(self, section_from, section_to, msg):
             data = self.read_tasks()
-            section_from = data[section_from]
-            section_to = data[section_to]
+            section_from = data[section_from]["body"]
+            section_to = data[section_to]["body"]
             section_to[msg] = section_from[msg]
 
             del section_from[msg]
 
         def assign_task(self, section_name, msg, emoji):
             data = self.read_tasks()
-            section = data[section_name]
-            section[msg] = emoji
+            section_body = data[section_name]["body"]
+            section_body[msg] = emoji
 
-db2 = DB()
-db = DB()
-board = db.Board(db,"test3")
-board.create_from_template()
+        def read_pinned(self):
+            return self.read_document("pinned")['data']
+
+        def add_pinned(self,add_data):
+            data = self.read_pinned()
+            data.append(add_data)
+            print(data)
+            data_write = {'data':data}
+            self.write_document("pinned",data_write)
+
+        def del_pinned(self,del_msg):
+            pinned = self.read_pinned()
+            del pinned[pinned.index(del_msg)]
+            data_write = {'data':pinned}
+            self.write_document("pinned",data_write)
+            
+
+#db2 = DB()
+# db = DB()
+# board = db.Board(db,"test10")
+# print(board.read_pinned())
+# board.add_pinned("hello there!!")
+# board.del_pinned("msg2")
+#board.create_from_template()
 # print(board.read_members())
 # board.add_member("@hihithisisme","lexuan","smilely")
 # print(board.read_members())
@@ -146,10 +165,13 @@ board.create_from_template()
 # print(board.read_tasks())
 
 
+
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 @app.route('/',methods=["GET","POST"])
 def echo():
+    board = session['board']
     if request.method == "POST":
         print("next is requesting data")
         data = request.get_data().decode("utf-8")
@@ -162,6 +184,7 @@ def echo():
 
 @app.route('/addTask/',methods=["GET","POST"])
 def update_sections_flask():
+    board = session['board']
     if request.method == "POST":
         print("adding task now")
         data = json.loads(request.get_data().decode("utf-8"))
@@ -170,8 +193,26 @@ def update_sections_flask():
         board.overwrite_sections(data['data'])
         print("added successfully")
     return "hello"
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 73fdbba8e2597974171207a628be70a66b9c5ed3
 @app.route('/index/',methods=["GET","POST"])
 def ind():
-    return render_template("main.html")
+    board = session['board']
+    return render_template("main.html",board = board)
 
+@app.route('/login/', methods=["GET","POST"])
+def login():
+    if request.method == "POST":
+        print("posting info")
+        db = DB()
+        board = db.board_ref(board_name)
+        if board.check_if_empty():
+            board.create_from_template()
+        session['board'] = board_name
+
+        return redirect('/index/')
+
+    return render_template("login.html")
