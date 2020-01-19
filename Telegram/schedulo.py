@@ -18,9 +18,6 @@ from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
 update_id = None
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
-logger = logging.getLogger(__name__)
 PROJECT_NAME, MEMBERS,MEMBERS2, EMOJI, LAST_EMOJI, START_PROJECT = range(6)
 user_data = dict()
 
@@ -36,11 +33,10 @@ def start(update, context):
 
 
 def project_name(update, context):
-    user = update.message.from_user
     name = update.message.text
     logger.info("Project name: %s", name)
     update.message.reply_text(
-        "Okay, " + user.first_name + ", Project " + name + " started!\n"
+        "Okay, Project " + name + " started!\n"
          "How many members do you have inside your project?",
     )
 
@@ -114,7 +110,9 @@ def show_members(update,context):
 
     update.message.reply_text(reply_text)
 
-def add_task(update,context):
+#def add_task(update,context):
+    #nothning
+
 
 
 

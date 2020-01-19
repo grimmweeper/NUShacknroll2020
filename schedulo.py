@@ -101,6 +101,7 @@ def show_tasks(update,context):
     doing = data['doing']['body']
     for x in doing :
         reply_text += x + ": " + doing.get(x)+ "\n"
+    reply_text += "\n"
 
     reply_text += "*Todo*\n"
     doing = data['todo']['body']
@@ -128,8 +129,15 @@ def show_members(update,context):
 ##############################################################
 #TODO: Change emojis selection into buttons
 def add_task_todo_1(update,context):
+    data = user_data.get('board').read_members()
+    emoji_list = []
+    print(data)
+    for x in data:
+        emoji_list.append(str(data[x]['emoji']))
+    reply_keyboard = [emoji_list]
     update.message.reply_text(
-        "Please type in the emoji:"
+        "Please type in the emoji:",
+        reply_markup=ReplyKeyboardMarkup(reply_keyboard,one_time_keyboard=True)
     )
     return ADDTODO2
     
@@ -142,7 +150,10 @@ def add_task_todo_2(update,context):
 
 def add_task_todo_3(update,context):
     temp_text = update.message.text
-    user_data['board'].add_task("todo",temp_text,temp_emo)
+    user_data.get('board').add_task("todo",temp_text,temp_emo)
+    update.message.reply_text(
+        "Task Recorded! Use /showTasks to see the tasks."
+    )
 
 
 def add_task_doing_1(update,context):

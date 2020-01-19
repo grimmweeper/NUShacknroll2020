@@ -103,6 +103,7 @@ class DB:
             section = data[section_name]
             section[msg] = emoji
             self.write_document("sections", data)
+            print(msg)
 
         def add_member(self, name, emoji, color="white"):
             data = self.read_members()
@@ -169,13 +170,7 @@ def update_sections_flask():
         board = DB().board_ref(data['board_name'])
         board.overwrite_sections(data['data'])
         print("added successfully")
-<<<<<<< HEAD
     return None
-    
-
-=======
-    return "hello"
->>>>>>> cb8bc38468ac07a38194761bdda0c03274dad916
 
 @app.route('/index/',methods=["GET","POST"])
 def ind():
