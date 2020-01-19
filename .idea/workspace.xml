@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e01cc767-d406-4f2e-9b96-ae3815d71444" name="Default Changelist" comment="asdf">
+    <list default="true" id="e01cc767-d406-4f2e-9b96-ae3815d71444" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Telegram/schedulo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Telegram/schedulo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyMethods.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyMethods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schedulo.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedulo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -304,22 +302,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1579359650731" />
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1579400038867">
+    <state width="757" height="2" key="GridCell.Tab.0.bottom" timestamp="1579404335639">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579400038867" />
-    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1579400038867">
+    <state width="757" height="2" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579404335639" />
+    <state width="757" height="2" key="GridCell.Tab.0.center" timestamp="1579404335639">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579400038867" />
-    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1579400038866">
+    <state width="757" height="2" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579404335639" />
+    <state width="757" height="2" key="GridCell.Tab.0.left" timestamp="1579404335639">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579400038866" />
-    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1579400038867">
+    <state width="757" height="2" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579404335639" />
+    <state width="757" height="2" key="GridCell.Tab.0.right" timestamp="1579404335639">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579400038867" />
+    <state width="757" height="2" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579404335639" />
     <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1579359657298">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -360,10 +358,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1579399985924" />
-    <state x="468" y="205" key="git4idea.merge.GitPullDialog" timestamp="1579399992635">
+    <state x="468" y="205" key="git4idea.merge.GitPullDialog" timestamp="1579400973110">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="468" y="205" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1579399992635" />
+    <state x="468" y="205" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1579400973110" />
     <state x="425" y="66" width="670" height="676" key="search.everywhere.popup" timestamp="1579358732947">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
