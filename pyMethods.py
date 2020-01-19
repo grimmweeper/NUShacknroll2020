@@ -125,11 +125,14 @@ class DB:
             section_to[msg] = section_from[msg]
 
             del section_from[msg]
+            self.write_document("sections", data)
+
 
         def assign_task(self, section_name, msg, emoji):
             data = self.read_tasks()
             section_body = data[section_name]["body"]
             section_body[msg] = emoji
+            self.write_document("sections", data)
 
         def read_pinned(self):
             return self.read_document("pinned")['data']
@@ -147,23 +150,6 @@ class DB:
             data_write = {'data':pinned}
             self.write_document("pinned",data_write)
             
-
-#db2 = DB()
-# db = DB()
-# board = db.Board(db,"test10")
-# print(board.read_pinned())
-# board.add_pinned("hello there!!")
-# board.del_pinned("msg2")
-#board.create_from_template()
-# print(board.read_members())
-# board.add_member("@hihithisisme","lexuan","smilely")
-# print(board.read_members())
-# print("=======================================================================")
-# board.add_task("todo","HELLO THERE","frown")
-# print(board.read_tasks())
-# board.delete_task("todo","HELLO THERE")
-# print(board.read_tasks())
-
 
 
 app = Flask(__name__)
