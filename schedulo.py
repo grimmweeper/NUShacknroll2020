@@ -227,7 +227,7 @@ def cancel(update, context):
 
 
 ##############################################################
-# MOVE TASK (dk if it will work)
+# MOVE TASK
 ##############################################################    
 
 def moving_task_1(update, context):
@@ -269,7 +269,7 @@ def moving_task_3(update, context):
 
 
 ##############################################################
-# DELETE TASK (dk if it will work)
+# DELETE TASK
 ##############################################################    
 
 def delete_task_1(update, context):
