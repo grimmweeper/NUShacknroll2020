@@ -33,6 +33,13 @@ class DB:
             self.db = outer_instance.db
             self.board = self.db.collection(board_name)
 
+        def check_if_empty(self):
+            docs = self.board.stream()
+            empty = True
+            for doc in docs:
+                empty = False
+            return empty
+
         def create_from_template(self):
             
             sections = self.board.document("sections")
@@ -137,6 +144,7 @@ class DB:
 # db2 = DB()
 # db = DB()
 # board = db.board_ref("test10")
+# print(board.check_if_empty())
 # board.create_from_template()
 # board.add_task("todo","hihinoticemesenpai!")
 # print(board.read_members())
