@@ -152,9 +152,9 @@ class DB:
             
 
 #db2 = DB()
-db = DB()
-board = db.Board(db,"test10")
-board.move_task("todo","doing","hihinoticemesenpai!")
+# db = DB()
+# board = db.Board(db,"test10")
+# board.move_task("todo","doing","hihinoticemesenpai!")
 # print(board.read_pinned())
 # board.add_pinned("hello there!!")
 # board.del_pinned("msg2")
@@ -209,6 +209,7 @@ def ind():
 def login():
     if request.method == "POST":
         print("posting info")
+        board_name = request.form.get("boardID")
         db = DB()
         board = db.board_ref(board_name)
         if board.check_if_empty():
