@@ -199,7 +199,7 @@ def ind():
     board_name = session['board']
     board = DB().board_ref(board_name)
     pinned_data = board.read_pinned()
-    return render_template("main.html",board = board,pinned_data)
+    return render_template("main.html",board = board,pinned_data = pinned_data)
 
 @app.route('/login/', methods=["GET","POST"])
 def login():
