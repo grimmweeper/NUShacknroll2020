@@ -5,8 +5,9 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from os import path
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,session, redirect
 import json
+import os
 
 basepath = path.dirname(__file__)
 filepath = path.abspath(path.join(basepath, ".", ".", "schedulo-18432-621fa7d3e711.json"))
@@ -124,29 +125,40 @@ class DB:
             section_to[msg] = section_from[msg]
 
             del section_from[msg]
+            self.write_document("sections", data)
+
 
         def assign_task(self, section_name, msg, emoji):
             data = self.read_tasks()
             section_body = data[section_name]["body"]
             section_body[msg] = emoji
+            self.write_document("sections", data)
 
         def read_pinned(self):
-            return self.read_document("pinned")
+            return self.read_document("pinned")['data']
 
         def add_pinned(self,add_data):
-            self.write_document("pinned",add_data)
+            data = self.read_pinned()
+            data.append(add_data)
+            print(data)
+            data_write = {'data':data}
+            self.write_document("pinned",data_write)
 
         def del_pinned(self,del_msg):
-            pinned = self.read_document("pinned")
-            del pinned[del_msg]
+            pinned = self.read_pinned()
+            del pinned[pinned.index(del_msg)]
+            data_write = {'data':pinned}
+            self.write_document("pinned",data_write)
+            
 
-
-# db2 = DB()
-# db = DB()
-# board = db.board_ref("test10")
-# print(board.check_if_empty())
-# board.create_from_template()
-# board.add_task("todo","hihinoticemesenpai!")
+#db2 = DB()
+db = DB()
+board = db.Board(db,"test10")
+board.move_task("todo","doing","hihinoticemesenpai!")
+# print(board.read_pinned())
+# board.add_pinned("hello there!!")
+# board.del_pinned("msg2")
+#board.create_from_template()
 # print(board.read_members())
 # board.add_member("@hihithisisme","lexuan","smilely")
 # print(board.read_members())
@@ -157,10 +169,13 @@ class DB:
 # print(board.read_tasks())
 
 
+
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 @app.route('/',methods=["GET","POST"])
 def echo():
+    board = session['board']
     if request.method == "POST":
         print("next is requesting data")
         data = request.get_data().decode("utf-8")
@@ -173,6 +188,7 @@ def echo():
 
 @app.route('/addTask/',methods=["GET","POST"])
 def update_sections_flask():
+    board = session['board']
     if request.method == "POST":
         print("adding task now")
         data = json.loads(request.get_data().decode("utf-8"))
@@ -180,9 +196,25 @@ def update_sections_flask():
         board = DB().board_ref(data['board_name'])
         board.overwrite_sections(data['data'])
         print("added successfully")
-    return None
+    return "hello"
 
 @app.route('/index/',methods=["GET","POST"])
 def ind():
-    return render_template("main.html")
+    board_name = session['board']
+    board = DB().board_ref(board_name)
+    pinned_data = board.read_pinned()
+    return render_template("main.html",board = board,pinned_data = pinned_data)
 
+@app.route('/login/', methods=["GET","POST"])
+def login():
+    if request.method == "POST":
+        print("posting info")
+        db = DB()
+        board = db.board_ref(board_name)
+        if board.check_if_empty():
+            board.create_from_template()
+        session['board'] = board_name
+
+        return redirect('/index/')
+
+    return render_template("login.html")
