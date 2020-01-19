@@ -44,10 +44,7 @@ class DB:
                 "width": "100px",
                 "left": "200px",
                 "top": "100px",
-                "body": {
-                "msg1": "emoji",
-                "msg2": "emoji"
-                }
+                "body": {}
             }
             doingData = {
                 "title": "doing",
@@ -56,10 +53,7 @@ class DB:
                 "width": "100px",
                 "left": "200px",
                 "top": "100px",
-                "body": {
-                "msg1": "emoji",
-                "msg2": "emoji"
-                }
+                "body": {}
             }
             doneData = {
                 "title": "done",
@@ -68,10 +62,7 @@ class DB:
                 "width": "100px",
                 "left": "200px",
                 "top": "100px",
-                "body": {
-                "msg1": "emoji",
-                "msg2": "emoji"
-                }
+                "body": {}
             }
 
             sections.set({
@@ -81,7 +72,7 @@ class DB:
             })
 
             self.board.document("members").set({})
-            self.board.document("agenda").set({})
+            self.board.document("pinned").set({})
 
         def read_document(self,document_name):
             return self.board.document(document_name).get().to_dict()
@@ -100,8 +91,8 @@ class DB:
 
         def add_task(self, section_name, msg, emoji = ""):
             data = self.read_tasks()
-            section = data[section_name]
-            section[msg] = emoji
+            section_body = data[section_name]["body"]
+            section_body[msg] = emoji
             self.write_document("sections", data)
 
         def add_member(self, name, emoji, color="white"):
@@ -132,10 +123,18 @@ class DB:
             section = data[section_name]
             section[msg] = emoji
 
+        def read_pinned(self):
+            return self.read_document("pinned")
+
+        def add_pinned(self,add_data):
+            self.write_document("pinned",add_data)
+            
+
 db2 = DB()
 db = DB()
-board = db.Board(db,"test3")
-board.create_from_template()
+board = db.board_ref("test10")
+# board.create_from_template()
+board.add_task("todo","hihinoticemesenpai!")
 # print(board.read_members())
 # board.add_member("@hihithisisme","lexuan","smilely")
 # print(board.read_members())
@@ -169,13 +168,7 @@ def update_sections_flask():
         board = DB().board_ref(data['board_name'])
         board.overwrite_sections(data['data'])
         print("added successfully")
-<<<<<<< HEAD
-    return None
-    
-
-=======
     return "hello"
->>>>>>> cb8bc38468ac07a38194761bdda0c03274dad916
 
 @app.route('/index/',methods=["GET","POST"])
 def ind():
