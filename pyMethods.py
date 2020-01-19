@@ -113,22 +113,22 @@ class DB:
 
         def delete_task(self, section_name, msg):
             data = self.read_tasks()
-            section = data[section_name]
-            del section[msg]
+            section_body = data[section_name]["body"]
+            del section_body[msg]
             self.write_document("sections", data)
 
         def move_task(self, section_from, section_to, msg):
             data = self.read_tasks()
-            section_from = data[section_from]
-            section_to = data[section_to]
+            section_from = data[section_from]["body"]
+            section_to = data[section_to]["body"]
             section_to[msg] = section_from[msg]
 
             del section_from[msg]
 
         def assign_task(self, section_name, msg, emoji):
             data = self.read_tasks()
-            section = data[section_name]
-            section[msg] = emoji
+            section_body = data[section_name]["body"]
+            section_body[msg] = emoji
 
         def read_pinned(self):
             return self.read_document("pinned")
