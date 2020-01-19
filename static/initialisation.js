@@ -5,9 +5,10 @@ fetchNotes().then(function(val){
 populateMessages();
 function populateMessages(){
     var json = '{{ pinned_data }}';
+    console.log(json);
 
     for(msg in json){
-        console.log(msg);
+        console.log(json[msg]);
     }
 }
 
@@ -16,7 +17,7 @@ async function fetchNotes(){
     //fetch from firebase the notecollection, and parse document name as its title
     return $.ajax({
         url: '/',
-        data:"test5",
+        data:"{{ board }}",
         type: 'POST',
         success: function(response){
             console.log(response);

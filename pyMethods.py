@@ -193,22 +193,18 @@ def update_sections_flask():
         board.overwrite_sections(data['data'])
         print("added successfully")
     return "hello"
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 73fdbba8e2597974171207a628be70a66b9c5ed3
 @app.route('/index/',methods=["GET","POST"])
 def ind():
     board_name = session['board']
     board = DB().board_ref(board_name)
     pinned_data = board.read_pinned()
-    return render_template("main.html",board = board,pinned_data = pinned_data)
+    return render_template("main.html",board = board_name,pinned_data = pinned_data)
 
 @app.route('/login/', methods=["GET","POST"])
 def login():
     if request.method == "POST":
         print("posting info")
+        board_name = request.form.get("boardID")
         db = DB()
         board = db.board_ref(board_name)
         if board.check_if_empty():
