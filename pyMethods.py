@@ -5,8 +5,9 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from os import path
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,session, redirect
 import json
+import os
 
 basepath = path.dirname(__file__)
 filepath = path.abspath(path.join(basepath, ".", ".", "schedulo-18432-621fa7d3e711.json"))
@@ -141,12 +142,10 @@ class DB:
             del pinned[del_msg]
             
 
-# db2 = DB()
-# db = DB()
-# board = db.board_ref("test10")
-# print(board.check_if_empty())
-# board.create_from_template()
-# board.add_task("todo","hihinoticemesenpai!")
+#db2 = DB()
+#db = DB()
+#board = db.Board(db,"test3")
+#board.create_from_template()
 # print(board.read_members())
 # board.add_member("@hihithisisme","lexuan","smilely")
 # print(board.read_members())
@@ -157,10 +156,13 @@ class DB:
 # print(board.read_tasks())
 
 
+
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 @app.route('/',methods=["GET","POST"])
 def echo():
+    board = session['board']
     if request.method == "POST":
         print("next is requesting data")
         data = request.get_data().decode("utf-8")
@@ -173,6 +175,7 @@ def echo():
 
 @app.route('/addTask/',methods=["GET","POST"])
 def update_sections_flask():
+    board = session['board']
     if request.method == "POST":
         print("adding task now")
         data = json.loads(request.get_data().decode("utf-8"))
@@ -184,5 +187,20 @@ def update_sections_flask():
 
 @app.route('/index/',methods=["GET","POST"])
 def ind():
+    board = session['board']
     return render_template("main.html")
 
+@app.route('/login/', methods=["GET","POST"])
+def login():
+    if request.method == "POST":
+        print("posting info")
+        board_name = request.form.get("boardID")
+        db = DB()
+        board = db.board_ref(board_name)
+        if board.check_if_empty():
+            board.create_from_template()
+        session['board'] = board_name
+
+        return redirect('/index/')
+
+    return render_template("login.html")
