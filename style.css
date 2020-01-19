@@ -14,28 +14,6 @@ html {
     font-family: sans-serif;
   }
 
-  #button{
-    border: .4rem solid black;
-    border-radius: .5rem;
-    margin: 1rem;
-    font-size: 20px;
-    padding: 1rem .5rem;
-    transition: all .07s ease;
-    
-    text-align: center;
-    color: white;
-    background: rgb(172, 18, 18);
-    text-shadow: 0 0 .5rem black;
-    left: 20px;
-    top: 110px;
-  }
-
-  .button {
-    text-align: center;
-    width: 20px;
-    height: 10px;
-    position: fixed;
-  }
   .newnote {
     border: .4rem solid black;
     border-radius: .5rem;
@@ -94,6 +72,5 @@ html {
     text-shadow: 0 0 .5rem black;
     font-weight: normal;
     font-size: medium;
-    position: static;
   }
   

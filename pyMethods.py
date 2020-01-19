@@ -151,24 +151,6 @@ class DB:
             self.write_document("pinned",data_write)
             
 
-#db2 = DB()
-# db = DB()
-# board = db.Board(db,"test10")
-# board.move_task("todo","doing","hihinoticemesenpai!")
-# print(board.read_pinned())
-# board.add_pinned("hello there!!")
-# board.del_pinned("msg2")
-#board.create_from_template()
-# print(board.read_members())
-# board.add_member("@hihithisisme","lexuan","smilely")
-# print(board.read_members())
-# print("=======================================================================")
-# board.add_task("todo","HELLO THERE","frown")
-# print(board.read_tasks())
-# board.delete_task("todo","HELLO THERE")
-# print(board.read_tasks())
-
-
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -197,13 +179,12 @@ def update_sections_flask():
         board.overwrite_sections(data['data'])
         print("added successfully")
     return "hello"
-
 @app.route('/index/',methods=["GET","POST"])
 def ind():
     board_name = session['board']
     board = DB().board_ref(board_name)
     pinned_data = board.read_pinned()
-    return render_template("main.html",board = board,pinned_data = pinned_data)
+    return render_template("main.html",board = board_name,pinned_data = pinned_data)
 
 @app.route('/login/', methods=["GET","POST"])
 def login():
